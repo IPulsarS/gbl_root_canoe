@@ -18,7 +18,10 @@ jobs:
     - name: Setup and Make
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential gcc-aarch64-linux-gnu clang lld llvm xxd python3 zip uuid-dev
+        # ⚠️ 这里新增了 liblzma-dev 以支持编译 C 版本的 extractfv
+        sudo apt-get install -y build-essential gcc-aarch64-linux-gnu clang lld llvm xxd python3 zip uuid-dev liblzma-dev
+        
+        # 执行默认的编译和打包步骤
         make dist DIST_NAME=canoe_release_build || true
 
     - name: Upload
